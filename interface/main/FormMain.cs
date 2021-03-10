@@ -32,6 +32,8 @@ namespace AutoScreenCapture
     /// </summary>
     public partial class FormMain : Form
     {
+        private bool flagVisible = false;
+
         // The "About Auto Screen Capture" form.
         private FormAbout _formAbout;
 
@@ -344,7 +346,7 @@ namespace AutoScreenCapture
                     _config.Settings.User.GetByKey("Passphrase", _config.Settings.DefaultSettings.Passphrase).Value = string.Empty;
                     SaveSettings();
 
-                    Opacity = 100;
+                    //Opacity = 100;
 
                     SearchDates();
                     SearchScreenshots();
@@ -353,7 +355,8 @@ namespace AutoScreenCapture
 
                     Show();
 
-                    Visible = true;
+                    flagVisible = true;
+                    //Visible = true;
                     ShowInTaskbar = true;
 
                     // If the window is mimimized then show it when the user wants to open the window.
@@ -384,10 +387,11 @@ namespace AutoScreenCapture
             {
                 _log.WriteDebugMessage("Hiding interface");
 
-                Opacity = 0;
+                //Opacity = 0;
 
                 Hide();
-                Visible = false;
+                flagVisible = false;
+                //Visible = false;
                 ShowInTaskbar = false;
 
                 _log.WriteDebugMessage("Running triggers of condition type InterfaceHiding");
@@ -427,7 +431,7 @@ namespace AutoScreenCapture
         /// <param name="e"></param>
         private void toolStripMenuItemShowHideInterface_Click(object sender, EventArgs e)
         {
-            if (Visible)
+            if (flagVisible)
             {
                 HideInterface();
             }
